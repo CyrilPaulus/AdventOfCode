@@ -1,4 +1,5 @@
-﻿using BenchmarkDotNet.Attributes;
+﻿using AdventOfCodeDay1;
+using BenchmarkDotNet.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,6 +48,24 @@ namespace AdventOfCodeDay1b
             var inputLoader = new InputLoader();
             var inputs = inputLoader.LoadInputs();
             var solver = new TreeSolver();
+            return solver.SolveParallel(inputs);
+        }
+
+        [Benchmark]
+        public int SolveRegex()
+        {
+            var inputLoader = new InputLoader();
+            var inputs = inputLoader.LoadInputs();
+            var solver = new RegexSolver();
+            return solver.Solve(inputs);
+        }
+
+        [Benchmark]
+        public int SolveRegexParallel()
+        {
+            var inputLoader = new InputLoader();
+            var inputs = inputLoader.LoadInputs();
+            var solver = new RegexSolver();
             return solver.SolveParallel(inputs);
         }
 

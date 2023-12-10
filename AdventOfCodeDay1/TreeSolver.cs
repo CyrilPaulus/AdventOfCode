@@ -30,7 +30,7 @@ namespace AdventOfCodeDay1b
             ComputeFailures(_backwardTree);
         }
 
-        public int Solve(List<char[]> inputs)
+        public int Solve(string[] inputs)
         {
             var total = 0;
             foreach(var line in inputs)
@@ -41,12 +41,12 @@ namespace AdventOfCodeDay1b
             return total;
         }
 
-        public int SolveParallel(List<char[]> inputs)
+        public int SolveParallel(string[] inputs)
         {
             return inputs.AsParallel().Sum(x => SolveLine(x));
         }
 
-        private int SolveLine(char[] line)
+        private int SolveLine(string line)
         {
             var first = Solve(line, _forwardTree);
             var last = Solve(line.Reverse(), _backwardTree);

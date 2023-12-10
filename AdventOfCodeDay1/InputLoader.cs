@@ -8,9 +8,9 @@ namespace AdventOfCodeDay1b
 {
     public class InputLoader
     {
-        public List<char[]> LoadInputs()
+        public string[] LoadInputs()
         {
-            return File.ReadAllLines("input.txt").Select(x => x.ToCharArray()).ToList();
+            return File.ReadAllLines("input.txt");
         }
     }
 }

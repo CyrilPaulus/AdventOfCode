@@ -8,18 +8,18 @@ namespace AdventOfCodeDay1b
 {
     public class NaiveSolver
     {
-        public int Solve(List<char[]> inputs)
+        public int Solve(string[] inputs)
         {
             var total = 0;
             foreach (var line in inputs)
-                total += ExtractTotal(new string(line));
+                total += ExtractTotal(line);
 
             return total;
         }
 
-        public int SolveParallel(List<char[]> inputs)
+        public int SolveParallel(string[] inputs)
         {
-            return inputs.AsParallel().Sum(x => ExtractTotal(new string(x)));
+            return inputs.AsParallel().Sum(x => ExtractTotal(x));
         }
 
         int ExtractTotal(string line)
@@ -44,7 +44,7 @@ namespace AdventOfCodeDay1b
         {
             return digit switch
             {
-                "0" or "1" or "2" or "3" or "4" or "5" or "6" or "7" or "8" or "9" => int.Parse(digit),
+                "1" or "2" or "3" or "4" or "5" or "6" or "7" or "8" or "9" => int.Parse(digit),
                 "one" => 1,
                 "two" => 2,
                 "three" => 3,
@@ -53,7 +53,8 @@ namespace AdventOfCodeDay1b
                 "six" => 6,
                 "seven" => 7,
                 "eight" => 8,
-                "nine" => 9
+                "nine" => 9,
+                _ => throw new NotImplementedException()
             };
         }
 
