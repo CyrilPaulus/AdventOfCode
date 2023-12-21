@@ -1,9 +1,13 @@
-﻿
-namespace AdventOfCodeDay3;
+﻿namespace AdventOfCode.Solvers.Day3;
 
-public class NaiveSolver
+public class Day3Solver : ISolver
 {
-    public int Solve(string[] lines)
+    public int GetDay()
+    {
+        return 3;
+    }
+
+    public string Solve(string[] lines, bool showDebug)
     {
         var width = lines[0].Length;
         var height = lines.Length;
@@ -43,7 +47,7 @@ public class NaiveSolver
             }
         }
 
-        return total;
+        return total.ToString();
     }
 
     private int? GetAdjacentGearIndex(int i, int j, string[] lines)

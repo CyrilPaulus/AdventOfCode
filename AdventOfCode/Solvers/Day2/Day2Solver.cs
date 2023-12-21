@@ -1,10 +1,13 @@
-﻿using System.Diagnostics;
+﻿namespace AdventOfCode.Solvers.Day2;
 
-namespace AdventOfCodeDay2;
-
-public class NaiveSolver
+public class Day2Solver : ISolver
 {
-    public int Solve(string[] input)
+    public int GetDay()
+    {
+        return 2;
+    }
+
+    public string Solve(string[] input, bool showDebug)
     {
         var availableColors = new Dictionary<Color, int>() {
             {Color.Red, 12},
@@ -15,15 +18,15 @@ public class NaiveSolver
         var games = input.Select(x => ParseLine(x));
         var total = games.Sum(x => GetPower(x));
 
-        foreach(var game in games)
+        foreach (var game in games)
             Console.WriteLine(game);
 
-        return total;
+        return total.ToString();
     }
 
     private int IsValid(Game game, Dictionary<Color, int> availableColors)
     {
-        foreach (var color in Enum.GetValues<Color>()) 
+        foreach (var color in Enum.GetValues<Color>())
         {
             var total = game.Sets.Max(x => x.Colors.GetValueOrDefault(color, 0));
             var available = availableColors.GetValueOrDefault(color, 0);
@@ -34,10 +37,10 @@ public class NaiveSolver
         return game.Id;
     }
 
-    private int GetPower(Game game) 
+    private int GetPower(Game game)
     {
         var power = 1;
-        foreach(var color in Enum.GetValues<Color>()) 
+        foreach (var color in Enum.GetValues<Color>())
         {
             //Min is max, deal with it
             var min = game.Sets.Max(x => x.Colors.GetValueOrDefault(color, 0));
@@ -46,7 +49,8 @@ public class NaiveSolver
         return power;
     }
 
-    private Game ParseLine(string line) {
+    private Game ParseLine(string line)
+    {
         var data = line.Split(':');
         var game = ParseGamePart(data[0]);
         game.Sets.AddRange(ParseSets(data[1]));
@@ -62,7 +66,7 @@ public class NaiveSolver
     {
         var set = new GameSet();
         var colorsStr = setStr.Split(',');
-        foreach(var colorStr in colorsStr)
+        foreach (var colorStr in colorsStr)
             UpdateColor(set, colorStr.Trim());
 
         return set;
@@ -97,7 +101,7 @@ public class NaiveSolver
 
     private class GameSet
     {
-        public Dictionary<Color, int> Colors {get; set;} = new();
+        public Dictionary<Color, int> Colors { get; set; } = new();
 
         public override string ToString()
         {
@@ -106,7 +110,8 @@ public class NaiveSolver
 
     }
 
-    private enum Color {
+    private enum Color
+    {
         Red,
         Green,
         Blue
